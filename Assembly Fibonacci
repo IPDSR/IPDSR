@@ -1,0 +1,53 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        
+        MOV     #200, R7                ; coloca 200 no R7
+        CALL    #FIBONACCI              ; chama a subrotina
+PARA
+        JMP     PARA
+
+/*-----------------------------------------------------------------------------
+NOME: FIBONACCI
+DESCRIÇÃO: CALCULA A SEQUÊNCIA DE FIBONACCI
+ENTRADA: R7 - LIMITE PARA O CÁLCULO DA SEQUÊNCIA
+SAÍDA: R6 - RETORNA O ÚLTIMO TERMO DA SEQUÊNCIA
+------------------------------------------------------------------------------*/
+
+FIBONACCI       
+        PUSH R4                         ; armazena temporariamente o valor de R4
+        PUSH R5
+        
+        CLR     R4                      ; limpa o valor armazenado no R4
+        MOV     #1,R5                   ; coloca o valor 1 ao R4
+VOLTA   
+        MOV     R5,R6                   ; coloca o valor do R5 no R6
+        ADD     R4,R6                   ; soma o valor do R4 ao valor do R6
+        CMP     R7,R6                   ; compara o valor de R6 com 1000
+        JHS     TESTE_IGUAL
+NOVO    
+        MOV     R5,R4                   ; coloca o valor de R5 no R4
+        MOV     R6,R5                   ; coloca o valor do R6 no R5
+        JMP     VOLTA                   ; retorna para a label VOLTA
+TESTE_IGUAL
+        JZ      NOVO                    ; se zero no R6, volta para a label NOVO
+        POP     R5                      ; retorna para R5 seu valor previamente armazenado
+        POP     R4
+        RET                             ; FIM
+        
+        JMP $                           ; jump to current location '$'
+                                        ; (endless loop)
+        END
