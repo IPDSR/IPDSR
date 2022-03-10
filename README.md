@@ -1,7 +1,7 @@
-- 👋 Hi, I’m @IPDSR
-- 👀 I’m currently interested in develop automated algorithms to trade on the stock exchange, for that i use MQL5 which is basically C with some peculiarities.
-- 🌱 The language I know the most is C, but I've studied Assembly for a while and started Python. I will put here small algorithms that I developed.
-- 📫 You can find me on
+- 👋 Hi, I'm Isabella!
+- 👀 I’m currently learning HTML, CSS and JavaScript for a future opportunity to professionally join the field.. 
+- 🌱 The language I know the most is C, but I've studied a bit Assembly. I will put here small algorithms and projects that I developed and that are still on progress.
+- 📫 You can find me on Linkedin: https://www.linkedin.com/in/isabella-pereira-792335193/
 
 <!---
 IPDSR/IPDSR is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
